@@ -7,6 +7,7 @@
 in {
   imports = [ # Include the results of the hardware scan.
     ./hardware-configuration.nix
+    ./users.nix
     ../../common
     ../../services/ssh.nix
     ../../services/nginx # equivalent to appending /default.nix
