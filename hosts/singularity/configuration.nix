@@ -10,7 +10,7 @@ in {
     ./users.nix
     ../../common
     ../../services/bots
-    ../../services/ssh.nix
+    ../../services/mysql
     ../../services/nginx # equivalent to appending /default.nix
     ../../services/ssh.nix
     "${m1cr0manConfigs}/common/sysconfig.nix"
