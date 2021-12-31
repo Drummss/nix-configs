@@ -2,7 +2,13 @@
 # and may be overwritten by future invocations.  Please make changes
 # to /etc/nixos/configuration.nix instead.
 { config, lib, pkgs, modulesPath, ... }:
-
+let
+  zfsMountConfig = name: { 
+    device = name;
+    fsType = "zfs";
+    options = [ "nofail" ];
+  };
+in
 {
   imports =
     [ (modulesPath + "/installer/scan/not-detected.nix")
@@ -13,30 +19,31 @@
   boot.kernelModules = [ "kvm-amd" "zram" ];
   boot.extraModulePackages = [ ];
 
-  fileSystems."/" =
-    { device = "zroot/nixos";
-      fsType = "zfs";
-    };
+  fileSystems = {
+      #Primary File Systems
+      "/boot" = { 
+        device = "/dev/disk/by-uuid/9FE7-0CB3";
+        fsType = "vfat";
+      };
 
-  fileSystems."/nix" =
-    { device = "zroot/nixos/store";
-      fsType = "zfs";
-    };
+      "/" = {
+        device = "zroot/nixos";
+        fsType = "zfs";
+      };
 
-  fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/9FE7-0CB3";
-      fsType = "vfat";
-    };
+      "/nix" = {
+        device = "zroot/nixos/store";
+        fsType = "zfs";
+      };
 
-  fileSystems."/home" =
-    { device = "zstorage/home";
-      fsType = "zfs";
-    };
+      # ZStorage File Systems
+      "/home" = zfsMountConfig "zstorage/home";
+      "/var/backup" = zfsMountConfig "zstorage/backups";
 
-  fileSystems."/var/lib/docker" =
-    { device = "zroot/docker";
-      fsType = "zfs";
-    };
+      # ZRoot File Systems
+      "/var/lib/docker" = zfsMountConfig "zroot/docker";
+      "/var/lib/mysql" = zfsMountConfig "zroot/services/mysql";
+  };
 
   swapDevices = [
     { device = "/dev/disk/by-uuid/633a5292-fd4d-4fef-8b44-7f39c3bc9f4c"; }
