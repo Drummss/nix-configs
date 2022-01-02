@@ -13,6 +13,7 @@ in {
     ../../services/mysql
     ../../services/nginx # equivalent to appending /default.nix
     ../../services/ssh.nix
+    ../../services/pterodactyl
     "${m1cr0manConfigs}/common/sysconfig.nix"
   ];
 
