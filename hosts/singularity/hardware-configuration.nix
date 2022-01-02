@@ -43,6 +43,7 @@ in
       # ZRoot File Systems
       "/var/lib/docker" = zfsMountConfig "zroot/docker";
       "/var/lib/mysql" = zfsMountConfig "zroot/services/mysql";
+      "/var/lib/pterodactyl" = zfsMountConfig "zroot/services/pterodactyl";
   };
 
   swapDevices = [
