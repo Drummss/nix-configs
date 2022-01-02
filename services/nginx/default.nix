@@ -3,6 +3,7 @@
   imports = [
     ./certs.nix
     ./vhosts/singularity.nix
+    ./vhosts/pterodactyl.nix
   ];
 
   services.nginx = {
