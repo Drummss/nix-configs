@@ -3,6 +3,7 @@
   users.groups = {
     drumsy = {};
     lucas = {};
+    backups = {};
   };
 
   users.users = {
