@@ -23,7 +23,8 @@ in
   systemd.services.pterodactyl-create-user = {
     serviceConfig.Type = "oneshot";
     path = [ config.services.mysql.package ];
-    wantedBy = [ "multi-user.target" ];
+    before = [ "docker-pterodactyl.service" ];
+    requiredBy = [ "docker-pterodactyl.service" ];
     requires = [ "mysql.service" ];
     after = [ "mysql.service" ];
     script = ''
@@ -62,9 +63,10 @@ in
     ];
     ports = with builtins; [
       "${toString httpPort}:80"
+      # "${toString httpsPort}:443"
     ];
     environment = with builtins; {
-      APP_URL = "http://49.12.133.196/";
+      APP_URL = "https://pterodactyl.unkn.in/";
       APP_TIMEZONE = "UTC";
       DB_HOST = dockerHostIp;
       DB_PORT = "3306";
@@ -77,10 +79,15 @@ in
       REDIS_HOST = dockerHostIp;
       REDIS_PORT = "${toString redisPort}";
       REDIS_PASSWORD = "pterodactyl";
+      TRUSTED_PROXIES = "*";
     };
     extraOptions = [
       "--add-host=host.docker.internal:host-gateway"
     ];
+    environmentFiles = [
+      # "/var/secrets/pterodactyl.env"
+    ];
+    # user = with builtins; "${toString config.users.users.pterodactyl.uid}:${toString config.users.groups.pterodactyl.gid}";
   };
 
   # Forward ports on the docker network
