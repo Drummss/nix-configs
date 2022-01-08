@@ -6,8 +6,9 @@
   m1cr0manConfigs = import ../../lib/m1cr0man-configs.nix;
 in {
   imports = [ # Include the results of the hardware scan.
-    ./hardware-configuration.nix
+    ./config
     ./users.nix
+    ./hardware-configuration.nix
     ../../common
     ../../services/bots
     ../../services/mysql
