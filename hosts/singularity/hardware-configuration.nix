@@ -11,7 +11,7 @@ let
 in
 {
   imports =
-    [ (modulesPath + "/installer/scan/not-detected.nix")
+    [ (modulesPath + "/installer/scan/not-detected.nix") 
     ];
 
   boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "sd_mod" "igb" ];
@@ -39,6 +39,7 @@ in
       # ZStorage File Systems
       "/home" = zfsMountConfig "zstorage/home";
       "/var/backup" = zfsMountConfig "zstorage/backups";
+      "/var/lib/pterodactyl/volumes" = zfsMountConfig "zstorage/pterodactyl";
 
       # ZRoot File Systems
       "/var/lib/docker" = zfsMountConfig "zroot/docker";
