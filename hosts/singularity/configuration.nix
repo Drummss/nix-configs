@@ -14,6 +14,7 @@ in {
     ../../services/nginx # equivalent to appending /default.nix
     ../../services/ssh.nix
     ../../services/pterodactyl/panel
+    ../../services/pterodactyl/wings
     "${m1cr0manConfigs}/common/sysconfig.nix"
   ];
 
@@ -38,7 +39,7 @@ in {
     hostId = "86d50764";
     hostName = "singularity";
     useDHCP = false;
-
+    
     usePredictableInterfaceNames = false;
     interfaces.eth0.ipv4.addresses = [{
       address = "49.12.133.196";
@@ -54,6 +55,9 @@ in {
       interface = "eth0";
     };
     nameservers = [ "8.8.8.8" "1.1.1.1" ];
+    hosts = {
+      "127.0.0.1" = [ "singularity.unkn.in" ];
+    };
   };
 
   time.timeZone = lib.mkForce "Etc/UTC";
@@ -67,4 +71,17 @@ in {
 
   # Enable KSM because the MC servers share a lot of data
   hardware.ksm.enable = true;
+
+  pterodactyl-wings = {
+    enable = true;
+    panelUrl = "https://pterodactyl.unkn.in";
+    nodeId = 1;
+    apiPort = 7005;
+    sftpPort = 7006;
+    token = "uNowv6c7zJw0JfydSvU2KuWLd5XjVEbsNFR91zNmGGDhQ9GO";
+    extraConfig.api.ssl = {
+      cert = config.security.acme.certs."${config.unknin.domain}".directory + "/cert.pem";
+      key = config.security.acme.certs."${config.unknin.domain}".directory + "/key.pem";
+    };
+  };
 }
