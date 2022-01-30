@@ -40,11 +40,13 @@ in
       "/home" = zfsMountConfig "zstorage/home";
       "/var/backup" = zfsMountConfig "zstorage/backups";
       "/var/lib/pterodactyl/volumes" = zfsMountConfig "zstorage/pterodactyl";
+      "/var/lib/verdaccio/storage" = zfsMountConfig "zstorage/services/verdaccio";
 
       # ZRoot File Systems
       "/var/lib/docker" = zfsMountConfig "zroot/docker";
       "/var/lib/mysql" = zfsMountConfig "zroot/services/mysql";
       "/var/lib/pterodactyl" = zfsMountConfig "zroot/services/pterodactyl";
+      "/var/lib/verdaccio" = zfsMountConfig "zroot/services/verdaccio";
   };
 
   swapDevices = [
