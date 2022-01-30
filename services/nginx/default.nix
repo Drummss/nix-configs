@@ -4,6 +4,7 @@
     ./certs.nix
     ./vhosts/singularity.nix
     ./vhosts/pterodactyl.nix
+    ./vhosts/verdaccio.nix
   ];
 
   services.nginx = {
