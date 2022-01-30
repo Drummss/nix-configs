@@ -31,7 +31,10 @@ in {
 
   time.timeZone = lib.mkForce "Etc/UTC";
 
-  environment.systemPackages = [ pkgs.nixos-option ];
+  environment.systemPackages = [
+    pkgs.arion 
+    pkgs.nixos-option 
+  ];
 
   virtualisation.docker = {
     enable = true;
