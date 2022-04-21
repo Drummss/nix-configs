@@ -12,12 +12,13 @@ in {
     ./network-configuration.nix
     ../../common
     ../../services/bots
-    ../../services/mysql
+    ../../services/databases
     ../../services/nginx # equivalent to appending /default.nix
     ../../services/ssh.nix
     ../../services/pterodactyl/panel
     ../../services/pterodactyl/wings
     "${m1cr0manConfigs}/common/sysconfig.nix"
+    (fetchTarball "https://github.com/msteen/nixos-vscode-server/tarball/master")
   ];
 
   system.stateVersion = "22.05";
@@ -40,6 +41,8 @@ in {
     enable = true;
     storageDriver = "zfs";
   };
+
+  services.vscode-server.enable = true;
 
   # Enable KSM because the MC servers share a lot of data
   hardware.ksm.enable = true;
