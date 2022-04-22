@@ -2,6 +2,7 @@
 {
   imports = [
     ./certs.nix
+    ./vhosts/matrix.nix
     ./vhosts/singularity.nix
     ./vhosts/pterodactyl.nix
     ./vhosts/verdaccio.nix
