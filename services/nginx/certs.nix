@@ -4,7 +4,7 @@ let
 in {
   security.acme = {
     acceptTerms = true;
-    email = "drumsyy@outlook.com";
+    defaults.email = "drumsyy@outlook.com";
     # Staging server for testing
     # server = "https://acme-staging-v02.api.letsencrypt.org/directory";
 

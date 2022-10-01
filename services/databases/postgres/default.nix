@@ -8,10 +8,11 @@
       listen_addresses = lib.mkForce "*";
     };
     authentication = ''
-      local     all       postgres    peer
-      local     all       all         md5
+      local     all         postgres    peer
+      local     all         all         md5
+      local     nextcloud   nextcloud   peer
 
-      host      all       all         0.0.0.0/0       md5
+      host      all         all         0.0.0.0/0       md5
     '';
   };
 

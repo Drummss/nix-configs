@@ -41,6 +41,7 @@ in
       "/var/backup" = zfsMountConfig "zstorage/backups";
       "/var/lib/pterodactyl/volumes" = zfsMountConfig "zstorage/pterodactyl";
       "/var/lib/verdaccio/storage" = zfsMountConfig "zstorage/services/verdaccio";
+      "/var/lib/nextcloud" = zfsMountConfig "zstorage/services/nextcloud";
 
       # ZRoot File Systems
       "/var/lib/docker" = zfsMountConfig "zroot/docker";

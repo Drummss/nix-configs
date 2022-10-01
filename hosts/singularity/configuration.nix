@@ -13,6 +13,7 @@ in {
     ../../common
     ../../services/bots
     ../../services/databases
+    ../../services/nextcloud
     ../../services/nginx # equivalent to appending /default.nix
     ../../services/ssh.nix
     ../../services/pterodactyl/panel
