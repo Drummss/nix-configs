@@ -20,7 +20,7 @@
         system = "x86_64-linux";
         # Import our old system configuration.nix
         modules = [
-          ./configuration.nix
+          ./hosts/singularity/configuration.nix
         ];
       };
     };
