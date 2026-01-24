@@ -3,11 +3,20 @@ let
   serviceConfig = {
     after = [ "zfs.target" ];
     restartIfChanged = false;
-    path = [ pkgs.zfs_unstable ];
+    path = [ config.boot.zfs.package ];
     serviceConfig.Type = "oneshot";
   };
+
+  # This script will iterate through all pools on a server
+  # and prompt the user to unlock them.
+  # The user can then run "pkill zfs" to resume the boot process.
+  unlockerScript = pkgs.writeShellScript "unlock-zfs.sh" ''
+    zpool import -a
+    zfs load-key -a
+  '';
 in {
   # Enable shell during boot for ZFS key prompt
+  boot.initrd.extraFiles."unlock-zfs.sh".source = unlockerScript;
   boot.initrd.network = {
     enable = true;
     ssh = {
@@ -15,22 +24,16 @@ in {
       port = 6416;
       authorizedKeys = config.users.users.root.openssh.authorizedKeys.keys;
       hostKeys = [
-        /var/secrets/ssh_initrd_host_ed25519_key
+        "/var/secrets/ssh_initrd_host_ed25519_key"
       ];
     };
-    postCommands = ''
-      echo 'zfs load-key -a && killall zfs' >> /root/.profile
-    '';
   };
 
-  services.zfs.autoSnapshot = {
-    enable = true;
-    frequent = 8;
-    hourly = 0;
-    daily = 7;
-    weekly = 0;
-    monthly = 1;
-  };
+  # Use DHCP during the initrd, then undo the config before stage 2 boot
+  boot.initrd.postMountCommands = ''
+    ip a flush eth0
+    ip l set eth0 down
+  '';
 
   # Incremental scrubbing to avoid drive murder
   systemd.services.zfs-scrub = serviceConfig // {
@@ -48,7 +51,7 @@ in {
     wantedBy = [ "timers.target" ];
     after = [ "zfs.target" ];
     timerConfig = {
-      OnCalendar = config.m1cr0man.zfs.scrubStartTime;
+      OnCalendar = "*-*-* 05:00:00";
       RandomizedDelaySec = 60;
       Persistent = false;
     };
@@ -60,7 +63,7 @@ in {
     wantedBy = [ "timers.target" ];
     after = [ "zfs.target" ];
     timerConfig = {
-      OnCalendar = config.m1cr0man.zfs.scrubStopTime;
+      OnCalendar = "*-*-* 05:30:00";
       RandomizedDelaySec = 60;
       Persistent = true;
     };
