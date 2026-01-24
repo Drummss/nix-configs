@@ -2,16 +2,14 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, lib, ... }: let
-  m1cr0manConfigs = import ../../lib/m1cr0man-configs.nix;
-in {
+{ config, pkgs, lib, ... }: {
   imports = [ # Include the results of the hardware scan.
     ./config
     ./users.nix
     ./hardware-configuration.nix
     ./network-configuration.nix
     ../../common
-    ../../services/audiobookshelf
+    #../../services/audiobookshelf
     ../../services/bots
     ../../services/databases
     #../../services/gh-runner
@@ -19,13 +17,11 @@ in {
     #../../services/nextcloud
     ../../services/nginx # equivalent to appending /default.nix
     ../../services/ssh.nix
-    ../../services/pterodactyl/panel
-    ../../services/pterodactyl/wings
-    # "${m1cr0manConfigs}/common/sysconfig.nix"
-    (fetchTarball "https://github.com/nix-community/nixos-vscode-server/tarball/master")
+    #../../services/pterodactyl/panel
+    #../../services/pterodactyl/wings
   ];
 
-  system.stateVersion = "22.05";
+  system.stateVersion = "26.05";
 
   # Use the GRUB 2 boot loader.
   boot.loader.grub = {
@@ -38,7 +34,6 @@ in {
 
   environment.systemPackages = [
     pkgs.arion 
-    pkgs.nixos-option
     pkgs.jetbrains-toolbox 
   ];
 
@@ -55,33 +50,8 @@ in {
 
   virtualisation.oci-containers.backend = "docker";
 
-  services.vscode-server.enable = true;
-  services.vscode-server.enableFHS = true;
-  services.vscode-server.installPath = "$HOME/.vscode-server";
-
   # Enable KSM because the MC servers share a lot of data
   hardware.ksm.enable = true;
-
-
-  ### TEMPORARY PORT FROM microman-configs
-
-  ## sysconfigs.nix
-  # Use DHCP during the initrd, then undo the config before stage 2 boot
-  boot.initrd.postMountCommands = ''
-    ip a flush eth0
-    ip l set eth0 down
-  '';
-
-  # Fix vscode-server node binary on login
-  environment.shellInit = let
-    node = pkgs.nodejs_24;
-    findutils = pkgs.findutils;
-  in ''
-    umask 0027
-    if test -e ~/.vscode-server; then
-      ${findutils}/bin/find $HOME/.vscode-server -type f -name node \( -execdir rm '{}' \; -and -execdir ln -s '${node}/bin/node' '{}' \; \)
-    fi
-  '';
 
   # Enable rsyslog
   services.rsyslogd.enable = true;

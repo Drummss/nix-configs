@@ -2,6 +2,6 @@
 {
   imports = [
     ./fail2ban.nix
-    ./pterodactyl-wings.nix
+#    ./pterodactyl-wings.nix
   ];
 }
