@@ -1,7 +1,7 @@
 { config, ... }:
 {
   pterodactyl-wings = {
-    enable = true;
+    enable = false;
     panelUrl = "https://pterodactyl.unkn.in";
     nodeId = 1;
     apiPort = 7005;

@@ -2,7 +2,8 @@
 let
   httpPort = 7000;
   redisPort = 7001;
-  dockerHostIp = "host.docker.internal";
+  # dockerHostIp = "host.docker.internal";
+  dockerHostIp = "172.18.0.1";
   dbPassword = (builtins.readFile /var/secrets/pterodactyl/pterodactyl-database-password);
 in
 {
@@ -39,7 +40,7 @@ in
   services.redis.servers."pterodactyl" = {
     enable = true;
     port = redisPort;
-    requirePassFile = "/var/secrets/pterodactyl-redis-password";
+    requirePassFile = "/var/secrets/pterodactyl/pterodactyl-redis-password";
     user = "pterodactyl";
     bind = "0.0.0.0";
     settings = {
@@ -53,6 +54,7 @@ in
   systemd.services."redis-pterodactyl".serviceConfig.StateDirectory = 
     lib.mkForce "pterodactyl/redis";
 
+  systemd.services."redis-pterodactyl".serviceConfig.Type = "notify";
 
   # Pterodactyl Panel
   virtualisation.oci-containers.containers."pterodactyl" = {
@@ -82,7 +84,7 @@ in
       TRUSTED_PROXIES = "*";
     };
     extraOptions = [
-      "--add-host=host.docker.internal:host-gateway"
+      # "--add-host=host.docker.internal:host-gateway"
     ];
     environmentFiles = [
       # "/var/secrets/pterodactyl.env"

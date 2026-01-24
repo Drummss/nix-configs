@@ -13,6 +13,12 @@ in {
       dnsProvider = "cloudflare";
       credentialsFile = "/var/secrets/cloudflare.${domain}.secret";
     };
+
+    certs."pandabot.one" = {
+      domain = "*.pandabot.one";
+      dnsProvider = "cloudflare";
+      credentialsFile = "/var/secrets/cloudflare.pandabot.one.secret";
+    };
   };
 
   users.users.nginx.extraGroups = [ "acme" ];

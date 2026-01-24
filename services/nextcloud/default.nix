@@ -6,9 +6,11 @@ in {
 
   services.nextcloud = {
     enable = true;
+    package = pkgs.nextcloud27;
     datadir = "/var/lib/nextcloud";
     hostName = domain;
     https = true;
+    enableBrokenCiphersForSSE = false;
     config = {
       adminpassFile = "/var/secrets/nextcloud/adminpass.txt";
       dbtype = "pgsql";

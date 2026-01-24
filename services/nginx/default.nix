@@ -2,8 +2,12 @@
 {
   imports = [
     ./certs.nix
+    ./vhosts/ovenmediaengine
+    ./vhosts/foundry.nix
     ./vhosts/matrix.nix
+    ./vhosts/grafana.nix
     ./vhosts/singularity.nix
+    ./vhosts/pandabot.nix
     ./vhosts/pterodactyl.nix
     ./vhosts/verdaccio.nix
   ];

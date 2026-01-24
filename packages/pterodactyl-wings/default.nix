@@ -1,18 +1,18 @@
 { buildGoModule, fetchFromGitHub, lib } :
 buildGoModule rec {
   pname = "pterodactyl-wings";
-  version = "1.5.3";
+  version = "1.11.6";
 
   src = fetchFromGitHub {
     owner = "pterodactyl";
     repo = "wings";
     rev = "v${version}";
-    sha256 = "sha256-2Tdx37/rojpj2d9Pm7KV6MFNveYmEqbP94HaJuwT4O4=";
+    sha256 = "sha256-lDJ0/yxmS7+9TVp3YpEdQQb12R4i2GyQ0w6RXoC5NHs=";
   };
 
-  vendorSha256 = "sha256-QuLUEDH+YZUME1nE3P6HnWhZmSfCSORElS6+x0oWEjM=";
+  vendorHash = "sha256-by5MdlpT4ODkY/1WZkqWaQzC/ilBCyfqRTOGTAYJAdE=";
 
-  runVend = true;
+  proxyVendor = true;
 
   meta = with lib; {
     description = "Wings is Pterodactyl's server control plane, built for the rapidly changing gaming industry and designed to be highly performant and secure.";
