@@ -4,5 +4,6 @@
     ./options.nix
     ./base.nix
     ./zfs.nix
+    ./corn_flakes.nix
   ];
 }

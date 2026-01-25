@@ -1,6 +1,5 @@
 { pkgs, config, lib, ... }:
 {
-  nixpkgs.config.allowUnfree = true;
 
   boot.kernelParams = [
     "boot.shell_on_fail"

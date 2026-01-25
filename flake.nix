@@ -21,6 +21,11 @@
         # Import our old system configuration.nix
         modules = [
           ./hosts/singularity/configuration.nix
+          {
+            # Pin the nixpkgs flake to match this flake's revision
+            # Source: https://www.tweag.io/blog/2020-07-31-nixos-flakes/ "Pinning Nixpkgs"
+            nix.registry.nixpkgs.flake = nixpkgs;
+          }
         ];
       };
     };
