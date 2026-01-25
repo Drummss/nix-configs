@@ -15,6 +15,17 @@ let
     zfs load-key -a
   '';
 in {
+  boot.supportedFilesystems = [ "zfs" ];
+  boot.zfs = {
+    package = pkgs.zfs_unstable;
+    forceImportRoot = true;
+    forceImportAll = false;
+  };
+  boot.extraModprobeConfig = ''
+    options zfs zfs_scrub_min_time_ms=50
+    options zfs zfs_arc_max=4294967296
+  '';
+
   # Enable shell during boot for ZFS key prompt
   boot.initrd.extraFiles."unlock-zfs.sh".source = unlockerScript;
   boot.initrd.network = {

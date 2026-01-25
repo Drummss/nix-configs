@@ -1,9 +1,5 @@
 { pkgs, config, lib, ... }:
 {
-  imports = [
-    #./options.nix
-  ];
-
   nixpkgs.config.allowUnfree = true;
 
   boot.kernelParams = [
@@ -11,18 +7,7 @@
     "ip=dhcp"
   ];
 
-  boot.supportedFilesystems = [ "zfs" ];
-  boot.zfs = {
-    package = pkgs.zfs_unstable;
-    forceImportRoot = true;
-    forceImportAll = false;
-  };
-  boot.extraModprobeConfig = ''
-    options zfs zfs_scrub_min_time_ms=50
-    options zfs zfs_arc_max=4294967296
-  '';
-
-  networking.domain = "m1cr0man.com";
+  networking.domain = "unkn.in";
 
   time.timeZone = "Europe/Dublin";
   i18n.defaultLocale = "en_IE.UTF-8";
