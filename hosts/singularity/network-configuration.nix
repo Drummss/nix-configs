@@ -28,8 +28,5 @@
       interface = "eth0";
     };
     nameservers = [ "8.8.8.8" "1.1.1.1" ];
-    hosts = {
-      "127.0.0.1" = [ "singularity.unkn.in" ];
-    };
   };
 }

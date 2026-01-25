@@ -30,8 +30,6 @@
     devices = [ "/dev/nvme0n1" ];
   };
 
-  time.timeZone = lib.mkForce "Etc/UTC";
-
   environment.systemPackages = [
     pkgs.arion 
     pkgs.jetbrains-toolbox 

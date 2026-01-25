@@ -9,7 +9,7 @@
 
   networking.domain = "unkn.in";
 
-  time.timeZone = "Europe/Dublin";
+  time.timeZone = "Etc/UTC";
   i18n.defaultLocale = "en_IE.UTF-8";
   console = {
     font = "Lat2-Terminus16";
