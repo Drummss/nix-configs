@@ -4,13 +4,16 @@
 
   inputs = {
     nixpkgs = {
-      url = "github:NixOS/nixpkgs/nixos-unstable";
+      url = "github:NixOS/nixpkgs/master";
+    };
+    pelican-wings = {
+      url = "path:./packages/pelican-wings";
     };
   };
 
   # Outputs can be anything, but the wiki + some commands define their own
   # specific keys. Wiki page: https://nixos.wiki/wiki/Flakes#Output_schema
-  outputs = { self, nixpkgs }: {
+  outputs = { self, nixpkgs, pelican-wings }: {
     # nixosConfigurations is the key that nixos-rebuild looks for.
     nixosConfigurations = {
       singularity = nixpkgs.lib.nixosSystem {
@@ -18,9 +21,17 @@
         # function which iterates over many possible systems. My system
         # is x86_64-linux, so I'm only going to define that
         system = "x86_64-linux";
+
+	specialArgs = {
+          pelicanWingsPackage = pelican-wings.packages.x86_64-linux.default;
+        };
+
         # Import our old system configuration.nix
         modules = [
           ./hosts/singularity/configuration.nix
+
+          pelican-wings.nixosModules.default
+
           {
             # Pin the nixpkgs flake to match this flake's revision
             # Source: https://www.tweag.io/blog/2020-07-31-nixos-flakes/ "Pinning Nixpkgs"
