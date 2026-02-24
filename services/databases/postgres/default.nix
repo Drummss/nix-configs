@@ -20,5 +20,5 @@
 
   users.users.postgres.extraGroups = [ "backups" ];
 
-  networking.firewall.allowedTCPPorts = [ 5432 ];
+  #networking.firewall.allowedTCPPorts = [ 5432 ];
 }
