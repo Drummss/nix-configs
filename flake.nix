@@ -22,10 +22,6 @@
         # is x86_64-linux, so I'm only going to define that
         system = "x86_64-linux";
 
-	specialArgs = {
-          pelicanWingsPackage = pelican-wings.packages.x86_64-linux.default;
-        };
-
         # Import our old system configuration.nix
         modules = [
           ./hosts/singularity/configuration.nix

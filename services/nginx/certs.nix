@@ -14,6 +14,13 @@ in {
       credentialsFile = "/var/secrets/cloudflare.${domain}.secret";
     };
 
+    certs."singularity.${domain}" = {
+      domain = "*.singularity.${domain}";
+      dnsProvider = "cloudflare";
+      credentialsFile = "/var/secrets/cloudflare.${domain}.secret";
+    };
+
+
     certs."pandabot.one" = {
       domain = "*.pandabot.one";
       dnsProvider = "cloudflare";

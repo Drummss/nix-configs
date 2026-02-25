@@ -8,7 +8,8 @@
     ./vhosts/grafana.nix
     ./vhosts/singularity.nix
     ./vhosts/pandabot.nix
-    ./vhosts/pterodactyl.nix
+    ./vhosts/pelican.nix
+    #./vhosts/pterodactyl.nix
     ./vhosts/verdaccio.nix
   ];
 

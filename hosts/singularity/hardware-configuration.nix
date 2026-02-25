@@ -39,6 +39,7 @@ in
       # ZStorage File Systems
       "/home" = zfsMountConfig "zstorage/home";
       "/var/backup" = zfsMountConfig "zstorage/backups";
+      "/var/lib/pelican/volumes" = zfsMountConfig "zstorage/pelican";
       "/var/lib/pterodactyl/volumes" = zfsMountConfig "zstorage/pterodactyl";
       "/var/lib/verdaccio/storage" = zfsMountConfig "zstorage/services/verdaccio";
       "/var/lib/nextcloud" = zfsMountConfig "zstorage/services/nextcloud";
@@ -46,6 +47,7 @@ in
       # ZRoot File Systems
       "/var/lib/docker" = zfsMountConfig "zroot/docker";
       "/var/lib/mysql" = zfsMountConfig "zroot/services/mysql";
+      "/var/lib/pelican" = zfsMountConfig "zroot/services/pelican";
       "/var/lib/pterodactyl" = zfsMountConfig "zroot/services/pterodactyl";
       "/var/lib/verdaccio" = zfsMountConfig "zroot/services/verdaccio";
   };

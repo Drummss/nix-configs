@@ -14,7 +14,7 @@
     ../../services/databases
     #../../services/gh-runner
     ../../services/monitoring
-    #../../services/nextcloud
+    ../../services/nextcloud
     ../../services/nginx # equivalent to appending /default.nix
     ../../services/ssh.nix
     #../../services/pterodactyl/panel
@@ -26,9 +26,12 @@
   # Use the GRUB 2 boot loader.
   boot.loader.grub = {
     enable = true;
-    version = 2;
     devices = [ "/dev/nvme0n1" ];
+    configurationLimit = 5;
+    efiSupport = true;
+    efiInstallAsRemovable = true;
   };
+  boot.loader.efi.efiSysMountPoint = "/boot";
 
   environment.systemPackages = [
     pkgs.arion 
@@ -47,6 +50,9 @@
   ];
 
   virtualisation.oci-containers.backend = "docker";
+
+  services.pelican-wings.enable = true;
+  systemd.services.pelican-wings.unitConfig.RequiresMountsFor = [ "/var/lib/pelican/volumes" ];
 
   # Enable KSM because the MC servers share a lot of data
   hardware.ksm.enable = true;
