@@ -11,21 +11,32 @@ in {
     certs."${domain}" = {
       domain = "*.${domain}";
       dnsProvider = "cloudflare";
-      environmentFile = "/var/secrets/cloudflare/unkn-in/env";
+# environmentFile = "/var/secrets/cloudflare/unkn-in/env";
       credentialFiles = {
-        "CF_API_KEY_FILE" = "/var/secrets/cloudflare/unkn-in/key.secret";
+        "CF_DNS_API_TOKEN_FILE" = "/var/secrets/cloudflare/unkn-in/key.secret";
       };
     };
 
     certs."singularity.${domain}" = {
       domain = "*.singularity.${domain}";
       dnsProvider = "cloudflare";
-      environmentFile = "/var/secrets/cloudflare/unkn-in/env";
+# environmentFile = "/var/secrets/cloudflare/unkn-in/env";
       credentialFiles = {
-        "CF_API_KEY_FILE" = "/var/secrets/cloudflare/unkn-in/key.secret";
+        "CF_DNS_API_TOKEN_FILE" = "/var/secrets/cloudflare/unkn-in/key.secret";
       };
     };
 
+    certs."infernal-ui.com" = {
+      domain = "*.infernal-ui.com";
+      extraDomainNames = [ "infernal-ui.com" ];
+
+      dnsProvider = "cloudflare";
+
+# environmentFile = "/var/secrets/cloudflare/infernal-ui/env";
+      credentialFiles = {
+        "CF_DNS_API_TOKEN_FILE" = "/var/secrets/cloudflare/infernal-ui/key.secret";
+      };
+    };
 
     #certs."pandabot.one" = {
     #  domain = "*.pandabot.one";

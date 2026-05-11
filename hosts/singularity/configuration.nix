@@ -33,6 +33,11 @@
   };
   boot.loader.efi.efiSysMountPoint = "/boot";
 
+  local.zfs.encryptedDatasets = [
+    "zroot"
+    "zstorage"
+  ];
+
   environment.systemPackages = [
     pkgs.arion 
     pkgs.jetbrains-toolbox 
@@ -51,8 +56,12 @@
 
   virtualisation.oci-containers.backend = "docker";
 
+  services.infernal-ui-docs.enable = true;
+
   services.pelican-wings.enable = true;
   systemd.services.pelican-wings.unitConfig.RequiresMountsFor = [ "/var/lib/pelican/volumes" ];
+
+  networking.firewall.allowedTCPPorts = [ 2022 ];
 
   # Enable KSM because the MC servers share a lot of data
   hardware.ksm.enable = true;

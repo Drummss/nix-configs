@@ -10,6 +10,7 @@
   };
 
   users.users.root.openssh.authorizedKeys.keys = [
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFLy/WMb9S2j/NOUyAkBng5qq8MCsx6rXb/OVua6U03g singularity-initrd-unlock"
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAege5ZduOXnBbhJ5V3TXVRTLkcQtVedwVbAL9cR5+g/ drumsy@singularity"
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIE/wSzCVLnKF7TVUvPBjRmlurMgxKoDajYqeFKWy8kJH root@gelandewagen"
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINV2JF6dDjXlmUgVlzk7y5VwXx4r5+1rd95e+lU4VayA lucas@blueboi"

@@ -28,6 +28,18 @@ in {
       default_phone_region = "UK";
       log_type = "file";
       maintenance_window_start = 1;
+      mail_smtpmode = "smtp";
+      mail_sendmailmode = "smtp";
+      mail_smtphost = "smtp.gmail.com";
+      mail_smtpport = 465;
+      mail_smtpsecure = "ssl";
+      mail_smtpauth = true;
+      mail_smtpname = "unknowninfernos@gmail.com";
+      mail_from_address = "unknowninfernos";
+      mail_domain = "gmail.com";
+    };
+    secrets = {
+      mail_smtppassword = "/var/secrets/nextcloud/smtp-pass.txt";
     };
     phpOptions = {
       "opcache.save_comments" = 60;

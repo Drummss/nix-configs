@@ -1,12 +1,47 @@
 {
   "nodes": {
+    "infernal-ui": {
+      "inputs": {
+        "nixpkgs": "nixpkgs"
+      },
+      "locked": {
+        "lastModified": 1778465243,
+        "narHash": "sha256-VaaYBFoyPCM+OB3XkthmqJx5NfyevvY2iOwad0T2uWE=",
+        "owner": "Drummss",
+        "repo": "infernal-ui",
+        "rev": "98951f69e9e4535e2e5cb7fe1883a2d173746664",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Drummss",
+        "ref": "main",
+        "repo": "infernal-ui",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1771970443,
-        "narHash": "sha256-tpy4AQvSQ5SdUm3QlnLnx22Xx3lP+6C/isbELUVfqQ0=",
+        "lastModified": 1777954456,
+        "narHash": "sha256-hGdgeU2Nk87RAuZyYjyDjFL6LK7dAZN5RE9+hrDTkDU=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "92cb785fa67a67772889115976786b8cc3da8c9d",
+        "rev": "549bd84d6279f9852cae6225e372cc67fb91a4c1",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_2": {
+      "locked": {
+        "lastModified": 1778184771,
+        "narHash": "sha256-SD2tiFh6oUsF1uzJmtG5yFd/JyOq7zcjvsQsflfeWlc=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "49c914304ddcda7974dbda34e0519b1cf8621b93",
         "type": "github"
       },
       "original": {
@@ -16,7 +51,7 @@
         "type": "github"
       }
     },
-    "nixpkgs_2": {
+    "nixpkgs_3": {
       "locked": {
         "lastModified": 1769170682,
         "narHash": "sha256-oMmN1lVQU0F0W2k6OI3bgdzp2YOHWYUAw79qzDSjenU=",
@@ -34,7 +69,7 @@
     },
     "pelican-wings": {
       "inputs": {
-        "nixpkgs": "nixpkgs_2"
+        "nixpkgs": "nixpkgs_3"
       },
       "locked": {
         "path": "./packages/pelican-wings",
@@ -48,7 +83,8 @@
     },
     "root": {
       "inputs": {
-        "nixpkgs": "nixpkgs",
+        "infernal-ui": "infernal-ui",
+        "nixpkgs": "nixpkgs_2",
         "pelican-wings": "pelican-wings"
       }
     }

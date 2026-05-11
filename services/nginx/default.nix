@@ -7,6 +7,7 @@
     #./vhosts/matrix.nix
     ./vhosts/grafana.nix
     ./vhosts/singularity.nix
+    ./vhosts/infernal-ui.nix
     #./vhosts/pandabot.nix
     ./vhosts/pelican.nix
     #./vhosts/pterodactyl.nix
