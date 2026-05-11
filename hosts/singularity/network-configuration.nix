@@ -1,12 +1,21 @@
-{ ... }:
+{ pkgs, ... }:
 {
-  boot.initrd.network.postCommands = ''
-    pkill udhcpc
-    ip a flush dev eth0
-    ip a add 49.12.133.196/26 dev eth0
-    ip route add default via 49.12.133.193 dev eth0
-    ip l set eth0 up
-  '';
+  # Required for ZFS unlocking
+  boot.initrd.systemd = {
+    network = {
+      enable = true;
+      networks."20-eth0" = {
+        enable = true;
+        name = "eth0";
+        DHCP = "no";
+        address = [
+          "49.12.133.196/26"
+          "2a01:4f8:242:4a1f::/64"
+        ];
+        routes = [{Gateway = "49.12.133.193";}];
+      };
+    };
+  };
 
   networking = {
     hostId = "86d50764";

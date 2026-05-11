@@ -7,6 +7,7 @@ let
     device = name;
     fsType = "zfs";
     options = [ "nofail" ];
+    neededForBoot = true;
   };
 in
 {
@@ -18,6 +19,7 @@ in
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-amd" "zram" ];
   boot.extraModulePackages = [ ];
+  boot.zfs.extraPools = [ "zstorage" ];
 
   fileSystems = {
       #Primary File Systems
