@@ -2,6 +2,7 @@
 {
   mailserver = {
     enable = true;
+    stateVersion = 3;
 
     # Mail server hostname.
     fqdn = "smtp.unkn.in";
@@ -11,14 +12,17 @@
       "unkn.in"
     ];
 
-    # Use existing ACME certs instead of letting the mailserver module
-    # create its own nginx/ACME setup.
-    certificateScheme = "acme";
-
-    # Main mailbox.
-    loginAccounts = {
-      "drummss@unkn.in" = {
-        hashedPasswordFile = "/var/lib/mailserver/secrets/drummss.hash";
+    x509.useACMEHost = config.unknin.domain;
+    
+    # Mail boxes.
+    #
+    # To add a new account, you will need to generate a password with:
+    # > nix shell nixpkgs#mkpasswd -c mkpasswd -sm bcrypt
+    # And then put paste the password into a file like:
+    # > sudo nano /var/lib/mailserver/secrets/<account_name>.hash
+    accounts = {
+      "admin@unkn.in" = {
+        hashedPasswordFile = "/var/lib/mailserver/secrets/admin.hash";
 
         aliases = [
           "postmaster@unkn.in"
@@ -29,11 +33,19 @@
 
         quota = "10G";
       };
+
+      "drummss@unkn.in" = {
+        hashedPasswordFile = "/var/lib/mailserver/secrets/drummss.hash";
+        quota = "10G";
+      };
+
+      "darkstar@unkn.in" = {
+        hashedPasswordFile = "/var/lib/mailserver/secrets/darkstar.hash";
+        quota = "10G";
+      };
     };
 
-    # Optional. I would leave this disabled at first because catch-alls
-    # tend to attract spam.
-    #
+    # This would act as a catch-all - and send all mail to the supplied mail box. 
     # forwards = {
     #   "@unkn.in" = "drummss@unkn.in";
     # };

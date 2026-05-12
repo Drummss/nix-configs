@@ -43,7 +43,7 @@ in
 
   services.nginx.virtualHosts.${domain} = {
     forceSSL = true;
-    useACMEHost = true;
+    useACMEHost = config.unknin.domain;
 
     root = pkgs.snappymail;
 

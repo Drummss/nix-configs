@@ -17,7 +17,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     simple-nixos-mailserver = {
-      url = "gitlab:simple-nixos-mailserver/nixos-mailserver";
+      url = "git+https://gitlab.com/simple-nixos-mailserver/nixos-mailserver.git?ref=main";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -41,7 +41,7 @@
 
           pelican-wings.nixosModules.default
           vscode-server.nixosModules.default
-          simple-nixos-mailserver.nixosModule.default
+          simple-nixos-mailserver.nixosModules.mailserver
 
           {
             nixpkgs.overlays = [
