@@ -19,6 +19,7 @@
     ../../services/ssh.nix
     #../../services/pterodactyl/panel
     #../../services/pterodactyl/wings
+    ../../modules/mail
   ];
 
   system.stateVersion = "26.05";
@@ -57,6 +58,10 @@
   virtualisation.oci-containers.backend = "docker";
 
   services.infernal-ui-docs.enable = true;
+  services.vscode-server = {
+    enable = true;
+    enableFHS = true; 
+  };
 
   services.pelican-wings.enable = true;
   systemd.services.pelican-wings.unitConfig.RequiresMountsFor = [ "/var/lib/pelican/volumes" ];

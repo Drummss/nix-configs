@@ -4,7 +4,7 @@
 
   inputs = {
     nixpkgs = {
-      url = "github:NixOS/nixpkgs/master";
+      url = "github:NixOS/nixpkgs/nixos-unstable";
     };
     pelican-wings = {
       url = "path:./packages/pelican-wings";
@@ -12,11 +12,19 @@
     infernal-ui = {
       url = "github:Drummss/infernal-ui/main";
     };
+    vscode-server = {
+      url = "github:msteen/nixos-vscode-server";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    simple-nixos-mailserver = {
+      url = "gitlab:simple-nixos-mailserver/nixos-mailserver";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   # Outputs can be anything, but the wiki + some commands define their own
   # specific keys. Wiki page: https://nixos.wiki/wiki/Flakes#Output_schema
-  outputs = { self, nixpkgs, pelican-wings, infernal-ui }: {
+  outputs = { self, nixpkgs, pelican-wings, infernal-ui, vscode-server, simple-nixos-mailserver }: {
     # nixosConfigurations is the key that nixos-rebuild looks for.
     nixosConfigurations = {
       singularity = nixpkgs.lib.nixosSystem {
@@ -28,10 +36,12 @@
         # Import our old system configuration.nix
         modules = [
           ./hosts/singularity/configuration.nix
-
-          pelican-wings.nixosModules.default
           
           ./modules/infernal-ui-docs.nix
+
+          pelican-wings.nixosModules.default
+          vscode-server.nixosModules.default
+          simple-nixos-mailserver.nixosModule.default
 
           {
             nixpkgs.overlays = [
