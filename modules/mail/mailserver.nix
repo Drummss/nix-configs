@@ -27,10 +27,14 @@
         aliases = [
           "postmaster@unkn.in"
           "abuse@unkn.in"
-          "admin@unkn.in"
           "contact@unkn.in"
         ];
 
+        quota = "10G";
+      };
+
+      "no-reply@unkn.in" = {
+        hashedPasswordFile = "/var/lib/mailserver/secrets/admin.hash";
         quota = "10G";
       };
 
