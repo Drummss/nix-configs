@@ -76,8 +76,8 @@ in
 
       ExecStart = ''
         ${pkgs.openvscode-server}/bin/openvscode-server \
-          --host 127.0.0.1 \
-          --port 3000 \
+          --host=0.0.0.0 \
+          --port=3000 \
           --telemetry-level=off \
           --accept-server-license-terms \
           --without-connection-token

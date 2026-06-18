@@ -22,6 +22,7 @@
 
     ../../modules/authentik
     ../../modules/databases
+    ../../modules/headscale
     ../../modules/mail
     ../../modules/vscode
   ];
