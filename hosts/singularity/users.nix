@@ -43,4 +43,8 @@
       ];
     };
   };
+
+  security.sudo.extraConfig = ''
+    Defaults:drummss timestamp_timeout=30
+  '';
 }

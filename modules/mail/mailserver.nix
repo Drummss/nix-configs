@@ -25,6 +25,7 @@
         hashedPasswordFile = "/var/lib/mailserver/secrets/admin.hash";
 
         aliases = [
+          "auth@unkn.in"
           "postmaster@unkn.in"
           "abuse@unkn.in"
           "contact@unkn.in"

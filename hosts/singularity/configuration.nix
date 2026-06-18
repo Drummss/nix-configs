@@ -20,6 +20,7 @@
     #../../services/pterodactyl/panel
     #../../services/pterodactyl/wings
 
+    ../../modules/authentik
     ../../modules/databases
     ../../modules/mail
     ../../modules/vscode
