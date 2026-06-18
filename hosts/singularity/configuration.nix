@@ -9,9 +9,9 @@
     ./hardware-configuration.nix
     ./network-configuration.nix
     ../../common
+    
     #../../services/audiobookshelf
     ../../services/bots
-    ../../services/databases
     #../../services/gh-runner
     ../../services/monitoring
     ../../services/nextcloud
@@ -19,7 +19,10 @@
     ../../services/ssh.nix
     #../../services/pterodactyl/panel
     #../../services/pterodactyl/wings
+
+    ../../modules/databases
     ../../modules/mail
+    ../../modules/vscode
   ];
 
   system.stateVersion = "26.05";

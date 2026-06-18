@@ -1,0 +1,6 @@
+{ ... }:
+{
+  imports = [
+    ./openvscode-server.nix
+  ];
+}
