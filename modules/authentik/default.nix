@@ -13,7 +13,7 @@ in
       email = {
         host = "smtp.unkn.in";
         port = 587;
-        username = "auth@unkn.in";
+        username = "admin@unkn.in";
         use_tls = true;
         use_ssl = false;
         from = "auth@unkn.in";
