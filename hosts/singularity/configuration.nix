@@ -56,17 +56,12 @@
 
   nixpkgs.config.permittedInsecurePackages = [
     "openssl-1.1.1u"
-    "nodejs-14.21.3"
-    "nodejs-16.20.1"
+    "nodejs-20.20.2"
   ];
 
   virtualisation.oci-containers.backend = "docker";
 
   services.infernal-ui-docs.enable = true;
-  services.vscode-server = {
-    enable = true;
-    enableFHS = true; 
-  };
 
   services.pelican-wings.enable = true;
   systemd.services.pelican-wings.unitConfig.RequiresMountsFor = [ "/var/lib/pelican/volumes" ];
