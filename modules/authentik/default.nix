@@ -12,10 +12,12 @@ in
     settings = {
       email = {
         host = "smtp.unkn.in";
-        port = 587;
+        port = 465;
         username = "admin@unkn.in";
-        use_tls = true;
-        use_ssl = false;
+
+        use_tls = false;
+        use_ssl = true;
+
         from = "auth@unkn.in";
       };
 
@@ -24,9 +26,21 @@ in
     };
   };
 
+  services.authentik-ldap = {
+    enable = true;
+    listenMetrics = "127.0.0.1:9302";
+    environmentFile = "/var/lib/authentik/ldap-outpost.env";
+  };
+
+  networking.firewall.interfaces.docker0.allowedTCPPorts = [
+    3389
+    6636
+  ];
+
   systemd.tmpfiles.rules = [
     "d /var/lib/authentik 0750 root root -"
     "d /var/lib/authentik/backups 0750 root root -"
+    "f /var/lib/authentik/ldap-outpost.env 0600 root root -"
   ];
 
   services.postgresql = {

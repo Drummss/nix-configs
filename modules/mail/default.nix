@@ -1,7 +1,7 @@
 { ... }:
 {
   imports = [
-    ./mailserver.nix
     ./snappymail.nix
+    ./stalwart.nix
   ];
 }

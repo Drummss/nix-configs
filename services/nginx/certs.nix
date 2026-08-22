@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, pkgs, ... }:
 let
   domain = config.unknin.domain;
 in {
@@ -11,10 +11,14 @@ in {
     certs."${domain}" = {
       domain = "*.${domain}";
       dnsProvider = "cloudflare";
-# environmentFile = "/var/secrets/cloudflare/unkn-in/env";
+      # environmentFile = "/var/secrets/cloudflare/unkn-in/env";
       credentialFiles = {
         "CF_DNS_API_TOKEN_FILE" = "/var/secrets/cloudflare/unkn-in/key.secret";
       };
+
+      reloadServices = [
+        config.virtualisation.oci-containers.containers.stalwart.serviceName
+      ];
     };
 
     certs."singularity.${domain}" = {

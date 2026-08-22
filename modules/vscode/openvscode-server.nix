@@ -1,8 +1,10 @@
 { pkgs, ... }:
 
 let
-  user = "drumsy";
+  user = "drummss";
   home = "/home/${user}";
+
+  codex-cli = pkgs.callPackage ../../packages/ai/codex-cli.nix {};
 
   vscodeSettings = {
     "nix.enableLanguageServer" = true;
@@ -35,6 +37,9 @@ in
     nixd
     direnv
     nix-direnv
+    bubblewrap
+
+    codex-cli
   ];
 
   programs.direnv = {
@@ -67,6 +72,8 @@ in
       nix-direnv
       nixfmt
       git
+      bubblewrap
+      codex-cli
     ];
 
     serviceConfig = {
